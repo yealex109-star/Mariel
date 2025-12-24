@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>给你的专属礼物</title>
+
+  <style>
+    body {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at top, #ff5f6d, #1a1a2e);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    /* 中央爱心文字 */
+    #主爱心 {
+      font-size: 48px;
+      animation: 心跳 1s infinite;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    @keyframes 心跳 {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+
+    /* 提示文字 */
+    #提示 {
+      margin-top: 20px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* 飘落元素 */
+    .小爱心 {
+      position: absolute;
+      animation: 下落 linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes 下落 {
+      from {
+        transform: translateY(-10vh);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 中央主爱心 -->
+  <div id="主爱心">❤️ MARIEL, FELIZ NAVIDAD ❤️</div>
+  <div id="提示">Toca el corazon ❤️</div>
+
+  <script>
+    const 主爱心 = document.getElementById("主爱心");
+    const 符号列表 = ["❤️", "✨", "💫", "🌸", "💕"];
+
+    /* 点击提示 */
+    主爱心.onclick = function () {
+      alert("❤️Que tengas un buen dia❤️");
+    };
+
+    /* 生成飘落元素 */
+    function 生成小爱心() {
+      const 心 = document.createElement("div");
+      心.className = "小爱心";
+      心.innerText = 符号列表[Math.floor(Math.random() * 符号列表.length)];
+
+      心.style.left = Math.random() * 100 + "vw";
+      心.style.animationDuration = (3 + Math.random() * 3) + "s";
+      心.style.fontSize = (10 + Math.random() * 24) + "px";
+
+      document.body.appendChild(心);
+
+      setTimeout(() => {
+        心.remove();
+      }, 6000);
+    }
+
+    setInterval(生成小爱心, 300);
+  </script>
+
+</body>
+</html>
